@@ -1,0 +1,47 @@
+from django.contrib import admin
+
+from .models import Post, Group, Comment, Follow
+
+
+class PostAdmin(admin.ModelAdmin):
+    list_display = (
+        'pk',
+        'text',
+        'pub_date',
+        'author',
+        'group',
+    )
+    list_display_links = (
+        'pk',
+        'text',
+    )
+    list_editable = ('group',)
+    search_fields = ('text',)
+    list_filter = ('pub_date',)
+    empty_value_display = '-пусто-'
+
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = tuple(field.name for field in Comment._meta.fields)
+    list_display_links = (
+        'id',
+        'text',
+        'post',
+    )
+    search_fields = ('text',)
+    list_filter = ('created',)
+
+
+class FollowAdmin(admin.ModelAdmin):
+    list_display = tuple(field.name for field in Follow._meta.fields)
+    list_display_links = (
+        'user',
+        'author',
+    )
+    list_filter = ('author',)
+
+
+admin.site.register(Post, PostAdmin)
+admin.site.register(Group)
+admin.site.register(Comment, CommentAdmin)
+admin.site.register(Follow, FollowAdmin)

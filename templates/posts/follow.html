@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}
+  Подписки на авторов
+{% endblock %}
+{% block content %}
+  <div class="container py-3">
+    <h1>
+      Подписки на авторов
+    </h1>
+    {% include 'posts/includes/switcher.html' with index=index follow=follow %}
+    {% for post in page_obj %}
+      {% include "posts/includes/posts_list.html" %}
+    {% endfor %}
+    {% include "posts/includes/paginator.html" %}
+  </div>
+{% endblock %}
