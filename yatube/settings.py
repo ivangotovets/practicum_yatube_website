@@ -2,18 +2,19 @@ import os
 
 DEBUG = True
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'posts:index'
 # LOGOUT_REDIRECT_URL = 'posts:index'
 
 POSTS_PER_PAGE = 10
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
-
-SECRET_KEY = 'qo7$yf*_kpou1ooj9lf!jkoc3+l5jmku@@a(xrv!tui4n=bj6&'
 
 CSRF_FAILURE_VIEW = 'core.views.permission_denied_view'
 
@@ -26,6 +27,9 @@ CACHES = {
     }
 }
 CACHE_SEC = 20
+
+
+SECRET_KEY = 'qo7$yf*_kpou1ooj9lf!jkoc3+l5jmku@@a(xrv!tui4n=bj6&'
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -75,7 +79,6 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # Добавлено: Искать шаблоны на уровне проекта
         'DIRS': [TEMPLATES_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -127,7 +130,3 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
